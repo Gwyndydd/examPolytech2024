@@ -55,4 +55,4 @@ services:
     ports:
       - 80:4200
     environment:
-      - BACKEND_URL: http://localhost:8080
+      BACKEND_URL: http://localhost:8080

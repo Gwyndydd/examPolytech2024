@@ -1,0 +1,8 @@
+Docker est une platforme de containérisation d'application. 
+Il permet de faciliter le deploiement des applications.
+
+La CI et la CD permettent de tester le code en continu avant la production.
+Les tests peuvent être effectués dans différents environnemnts (IOS, Windows, android)
+C'est une étape essentielle pour éviter des problèmes.
+
+Le cours était génial :)
