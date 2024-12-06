@@ -1,0 +1,21 @@
+### Pour l'ensemble de l'application 
+
+services:
+
+  ###service de la base de données
+  examPolytech2024-gwen-database:
+    container_name: gwen_db
+    image: mysql:9.1-oraclelinux9
+    volume:
+      - gwen_db:/var/lib/mysql/gwen_db:rw
+    environment:
+      #Variable obligatoire
+      MYSQL_ROOT_PASSWORD: ro0t
+
+      #Variables optionnelles
+      MYSQL_DATABASE: exam
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 4dm1n
+
+volumes:
+  gwen_db: #conf par défaut

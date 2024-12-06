@@ -93,3 +93,5 @@ local.properties
 *.orig
 
 node_modules/
+
+*.vscode
