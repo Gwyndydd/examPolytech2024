@@ -23,11 +23,16 @@ services:
       MYSQL_DATABASE: gwen_db
       MYSQL_USER: sa
       MYSQL_PASSWORD: admin
+    healthcheck:
+      test: mysqladmin ping -h localhost
+      interval: 10s
+      timeout: 3s
+      retries: 5
 
   java-backend:
     container_name: gwen_backend
-    #depends_on:
-      #- examPolytech2024-gwen-database
+    depends_on:
+      - examPolytech2024-gwen-database
     image: java_exam
     build:
       context: java
@@ -40,4 +45,14 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://gwen_db:3306/gwen_db
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: 4dm1n
-    
+  
+  angular_frontend:
+    container_name: gwen_frontend
+    image: angular_exam
+    build:
+      context: angular
+      dockerfile: Dockerfile
+    ports:
+      - 80:4200
+    environment:
+      - BACKEND_URL: http://localhost:8080
