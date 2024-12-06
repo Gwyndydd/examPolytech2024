@@ -1,5 +1,10 @@
 ### Pour l'ensemble de l'application 
 
+volumes:
+  gwen_db: #conf par défaut
+networks:
+  gwen_exam_network:
+
 services:
 
   ###service de la base de données
@@ -8,14 +13,31 @@ services:
     image: mysql:9.1-oraclelinux9
     volume:
       - gwen_db:/var/lib/mysql/gwen_db:rw
+    networks:
+      - gwen_exam_network
     environment:
       #Variable obligatoire
       MYSQL_ROOT_PASSWORD: ro0t
 
       #Variables optionnelles
-      MYSQL_DATABASE: exam
+      MYSQL_DATABASE: gwen_db
       MYSQL_USER: admin
       MYSQL_PASSWORD: 4dm1n
 
-volumes:
-  gwen_db: #conf par défaut
+  java-backend:
+    container_name: gwen_backend
+    #depends_on:
+      #- examPolytech2024-gwen-database
+    image: java_exam
+    build:
+      context: java
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8448
+    networks:
+      - gwen_exam_network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://gwen_db:3306/gwen_db
+      SPRING_DATASOURCE_USER: admin
+      SPRING_DATASOURCE_PASSWORD: 4dm1n
+    
