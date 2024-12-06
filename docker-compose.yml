@@ -11,8 +11,8 @@ services:
   examPolytech2024-gwen-database:
     container_name: gwen_db
     image: mysql:9.1-oraclelinux9
-    volume:
-      - gwen_db:/var/lib/mysql/gwen_db:rw
+    volumes:
+      - gwen_db:/var/lib/mysql:rw
     networks:
       - gwen_exam_network
     environment:
@@ -21,8 +21,8 @@ services:
 
       #Variables optionnelles
       MYSQL_DATABASE: gwen_db
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: 4dm1n
+      MYSQL_USER: sa
+      MYSQL_PASSWORD: admin
 
   java-backend:
     container_name: gwen_backend
@@ -38,6 +38,6 @@ services:
       - gwen_exam_network
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://gwen_db:3306/gwen_db
-      SPRING_DATASOURCE_USER: admin
+      SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: 4dm1n
     
